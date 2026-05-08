@@ -42,6 +42,20 @@ export default function BookingPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function formatPhone(value: string) {
+    const digits = value.replace(/\D/g, "").slice(0, 10);
+    const len = digits.length;
+    if (len === 0) return "";
+    if (len < 4) return `(${digits}`;
+    if (len < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const formatted = formatPhone(e.target.value);
+    setForm({ ...form, phone: formatted });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
@@ -135,7 +149,19 @@ export default function BookingPage() {
                 </div>
                 <div>
                   <label className={labelClass} style={labelStyle}>Phone</label>
-                  <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="(555) 000-0000" className={inputClass} style={inputStyle} />
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="tel"
+                    pattern="\(\d{3}\) \d{3}-\d{4}"
+                    required
+                    value={form.phone}
+                    onChange={handlePhoneChange}
+                    placeholder="(817) 000-0000"
+                    className={inputClass}
+                    style={inputStyle}
+                    aria-label="Phone number"
+                  />
                 </div>
                 <div>
                   <label className={labelClass} style={labelStyle}>Service</label>
@@ -148,7 +174,7 @@ export default function BookingPage() {
                   <label className={labelClass} style={labelStyle}>Frequency</label>
                   <select name="frequency" required value={form.frequency} onChange={handleChange} className={inputClass} style={inputStyle}>
                     <option value="">Select...</option>
-                    <option value="Weekly">Weekly ($20 off!)</option>
+                    <option value="Weekly">Weekly (10% off!)</option>
                     <option value="Bi-weekly">Bi-weekly</option>
                     <option value="Monthly">Monthly</option>
                     <option value="One-time">One-time</option>

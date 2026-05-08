@@ -38,13 +38,13 @@ export default function HomePage() {
           The Home Reset
         </span>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-5 leading-tight" style={{ color: "var(--text)" }}>
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-5 leading-tight whitespace-nowrap" style={{ color: "var(--text)" }}>
           Reset <span className="mx-3" style={{ color: "var(--accent-dark)" }}>·</span>
           Rest <span className="mx-3" style={{ color: "var(--accent-dark)" }}>·</span>
           Create
         </h1>
         <p className="text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style={{ color: "var(--text-muted)" }}>
-          Whether you&apos;re a busy family, a stay-at-home parent, or working long days —
+          Whether you&apos;re a busy family, a stay-at-home parent, or working long days,
           we will reset your space so you can get back to what matters.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -71,6 +71,11 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent-dark)" }}>What We Clean</span>
             <h2 className="text-3xl font-bold mt-2" style={{ color: "var(--text)" }}>We Serve</h2>
+            <p className="text-sm max-w-lg mx-auto leading-relaxed mt-3" style={{ color: "var(--text-muted)" }}>
+              Lake Country / Eagle Mountain / Lake Worth / Saginaw / Fort Worth
+              <br />
+              If you're unsure whether we cover your address, contact us and we'll confirm availability.
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
@@ -124,7 +129,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {[
-              { label: "1–2 bed / 1–2 bath", price: "$135" },
+              { label: "1–2 bed / 1–2 bath", price: "$140" },
               { label: "3 bed / 2 bath", price: "$180" },
               { label: "4 bed / 2–3 bath", price: "$220" },
               { label: "5+ bed", price: "$280" },
@@ -140,7 +145,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-xs mb-8" style={{ color: "rgba(249,246,241,0.4)" }}>
-            $20 off weekly cleans &nbsp;·&nbsp; First clean: 10% off &nbsp;·&nbsp; Deep clean: 1.5x
+            Weekly cleans: 10% off &nbsp;·&nbsp; First clean: 5% off &nbsp;·&nbsp; Deep clean: 1.5x
           </p>
           <Link
             href="/services"

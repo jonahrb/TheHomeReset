@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendEmail } from "@/lib/email";
 
 type BookingPayload = {
   name: string;
@@ -6,9 +7,8 @@ type BookingPayload = {
   phone: string;
   service: string;
   date: string;
-  time: string;
-  bedrooms: string;
-  bathrooms: string;
+  bedrooms?: string;
+  bathrooms?: string;
   notes?: string;
 };
 
@@ -29,14 +29,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { name, email, phone, service, date, time } = body;
+  const { name, email, phone, service, date } = body;
 
   // Input validation
-  if (!name || !email || !phone || !service || !date || !time) {
-    return NextResponse.json(
-      { error: "All required fields must be filled." },
-      { status: 400 }
-    );
+  if (!name || !email || !phone || !service || !date) {
+    return NextResponse.json({ error: "All required fields must be filled." }, { status: 400 });
   }
 
   if (name.length > 100) {
@@ -44,29 +41,18 @@ export async function POST(request: Request) {
   }
 
   if (!isValidEmail(email)) {
-    return NextResponse.json(
-      { error: "Invalid email address." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
   }
 
   if (!isValidPhone(phone)) {
-    return NextResponse.json(
-      { error: "Invalid phone number." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid phone number." }, { status: 400 });
   }
 
   const requestedDate = new Date(date);
   if (isNaN(requestedDate.getTime())) {
-    return NextResponse.json(
-      { error: "Invalid date provided." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid date provided." }, { status: 400 });
   }
 
-  // In a real app you would: save to a database, send a confirmation email, etc.
-  // For now we return a success response with the booking summary.
   const booking = {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
@@ -75,15 +61,33 @@ export async function POST(request: Request) {
     phone: phone.trim(),
     service,
     date,
-    time,
-    bedrooms: body.bedrooms,
-    bathrooms: body.bathrooms,
+    bedrooms: body.bedrooms ?? "",
+    bathrooms: body.bathrooms ?? "",
     notes: body.notes?.trim() ?? "",
     status: "pending",
   };
 
-  return NextResponse.json(
-    { message: "Booking request received.", booking },
-    { status: 201 }
-  );
+  // Build email body
+  const lines = [
+    `Name: ${booking.name}`,
+    `Email: ${booking.email}`,
+    `Phone: ${booking.phone}`,
+    `Service: ${booking.service}`,
+    `Date: ${booking.date}`,
+    `Bedrooms: ${booking.bedrooms}`,
+    `Bathrooms: ${booking.bathrooms}`,
+    `Notes: ${booking.notes}`,
+    `Submitted At: ${booking.createdAt}`,
+    `Request ID: ${booking.id}`,
+  ];
+
+  const text = lines.join("\n");
+
+  try {
+    await sendEmail("hello@thehomereset.us", "Booking Requested", text);
+  } catch (err) {
+    return NextResponse.json({ error: `Failed to send email: ${err instanceof Error ? err.message : String(err)}` }, { status: 500 });
+  }
+
+  return NextResponse.json({ message: "Booking request received.", booking }, { status: 201 });
 }

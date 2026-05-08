@@ -1,3 +1,5 @@
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const addons = [
@@ -10,6 +12,15 @@ const addons = [
 ];
 
 export default function ServicesPage() {
+  const [selected, setSelected] = useState<'reset' | 'deep'>('reset');
+
+  const baseRates = [
+    { size: '1–2 Bed / 1–2 Bath', base: 140 },
+    { size: '3 Bed / 2 Bath', base: 180 },
+    { size: '4 Bed / 2–3 Bath', base: 220 },
+    { size: '5+ Bed', base: 280 },
+  ];
+
   return (
     <>
       {/* Header */}
@@ -142,22 +153,44 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl overflow-hidden mb-8" style={{ background: "rgba(255,255,255,0.05)" }}>
-            {[
-              { size: "1–2 Bed / 1–2 Bath", base: "$135" },
-              { size: "3 Bed / 2 Bath", base: "$180" },
-              { size: "4 Bed / 2–3 Bath", base: "$220" },
-              { size: "5+ Bed", base: "$280" },
-            ].map((row, i, arr) => (
-              <div
-                key={row.size}
-                className="flex justify-between items-center py-5 px-7"
-                style={{ borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : undefined }}
+          {/* Service selector toggle */}
+          <div className="text-center mb-6">
+            <div className="inline-flex rounded-full bg-white/6 p-1" style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.02)' }}>
+              <button
+                onClick={() => setSelected('reset')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${selected === 'reset' ? 'bg-white text-black' : 'text-white/80'}`}
+                style={{
+                  border: 'none',
+                }}
               >
-                <span className="text-sm" style={{ color: "rgba(249,246,241,0.8)" }}>{row.size}</span>
-                <span className="text-xl font-bold" style={{ color: "var(--accent)" }}>{row.base}</span>
-              </div>
-            ))}
+                The Reset
+              </button>
+              <button
+                onClick={() => setSelected('deep')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${selected === 'deep' ? 'bg-white text-black' : 'text-white/80'}`}
+                style={{
+                  border: 'none',
+                }}
+              >
+                Deep Clean
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-2xl overflow-hidden mb-8" style={{ background: "rgba(255,255,255,0.05)" }}>
+            {baseRates.map((row, i, arr) => {
+              const price = row.base * (selected === 'deep' ? 1.5 : 1);
+              return (
+                <div
+                  key={row.size}
+                  className="flex justify-between items-center py-5 px-7"
+                  style={{ borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : undefined }}
+                >
+                  <span className="text-sm" style={{ color: "rgba(249,246,241,0.8)" }}>{row.size}</span>
+                  <span className="text-xl font-bold" style={{ color: "var(--accent)" }}>${price.toFixed(0)}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -166,19 +199,19 @@ export default function ServicesPage() {
               style={{ background: "rgba(201,169,122,0.12)", border: "1px solid rgba(201,169,122,0.25)" }}
             >
               <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--accent)" }}>First Time Clean</p>
-              <p className="text-2xl font-bold" style={{ color: "var(--bg)" }}>10% off</p>
+              <p className="text-2xl font-bold" style={{ color: "var(--bg)" }}>5% off</p>
             </div>
             <div
               className="p-6 rounded-2xl text-center"
               style={{ background: "rgba(201,169,122,0.12)", border: "1px solid rgba(201,169,122,0.25)" }}
             >
-              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--accent)" }}>Deep Clean</p>
-              <p className="text-2xl font-bold" style={{ color: "var(--bg)" }}>1.5 × base</p>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--accent)" }}>Weekly Recurring Cleans</p>
+              <p className="text-2xl font-bold" style={{ color: "var(--bg)" }}>10% off</p>
             </div>
           </div>
-          <p className="text-center text-xs" style={{ color: "rgba(249,246,241,0.4)" }}>
+          {/* <p className="text-center text-xs" style={{ color: "rgba(249,246,241,0.4)" }}>
             ✦ &nbsp;$20 off for clients who schedule weekly cleans
-          </p>
+          </p> */}
         </div>
       </section>
 

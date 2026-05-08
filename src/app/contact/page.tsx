@@ -27,6 +27,20 @@ export default function ContactPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function formatPhone(value: string) {
+    const digits = value.replace(/\D/g, "").slice(0, 10);
+    const len = digits.length;
+    if (len === 0) return "";
+    if (len < 4) return `(${digits}`;
+    if (len < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const formatted = formatPhone(e.target.value);
+    setForm({ ...form, phone: formatted });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
@@ -82,8 +96,17 @@ export default function ContactPage() {
                   <span className="text-2xl">📧</span>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)" }}>Email</p>
-                    <a href="mailto:info@thehomereset.us" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
-                      info@thehomereset.us
+                    <a href="mailto:hello@thehomereset.us" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
+                      hello@thehomereset.us
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-2xl">📞</span>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)" }}>Text / Call</p>
+                    <a href="tel:+18175550123" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
+                      (817) 555-0123
                     </a>
                   </div>
                 </li>
@@ -91,8 +114,8 @@ export default function ContactPage() {
                   <span className="text-2xl">📸</span>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)" }}>Instagram</p>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
-                      @the.home.reset.fw
+                    <a href="https://instagram.com/thehome.reset" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
+                      @thehome.reset
                     </a>
                   </div>
                 </li>
@@ -166,7 +189,7 @@ export default function ContactPage() {
               {[
                 { name: "name", label: "Your Name", type: "text", placeholder: "Jane Smith", required: true },
                 { name: "email", label: "Email Address", type: "email", placeholder: "jane@example.com", required: true },
-                { name: "phone", label: "Phone (optional)", type: "tel", placeholder: "(555) 000-0000", required: false },
+                { name: "phone", label: "Phone (optional)", type: "tel", placeholder: "(817) 000-0000", required: false },
               ].map((field) => (
                 <div key={field.name}>
                   <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--text-muted)" }}>
@@ -177,7 +200,10 @@ export default function ContactPage() {
                     name={field.name}
                     required={field.required}
                     value={(form as Record<string, string>)[field.name]}
-                    onChange={handleChange}
+                    onChange={field.name === 'phone' ? handlePhoneChange : handleChange}
+                    inputMode={field.name === 'phone' ? 'tel' : undefined}
+                    pattern={field.name === 'phone' ? "\\(\\d{3}\\) \\d{3}-\\d{4}" : undefined}
+                    aria-label={field.name === 'phone' ? 'Phone number' : undefined}
                     placeholder={field.placeholder}
                     className={inputClass}
                     style={inputStyle}
