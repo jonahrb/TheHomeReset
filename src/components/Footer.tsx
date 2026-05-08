@@ -19,12 +19,12 @@ export default function Footer() {
             <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(249,246,241,0.35)" }}>Contact</p>
             <ul className="space-y-3 text-sm" style={{ color: "rgba(249,246,241,0.55)" }}>
               <li>
-                <a href="mailto:hello@thehomereset.us" className="hover:opacity-100 transition">
+                <a href="mailto:hello@thehomereset.us">
                   hello@thehomereset.us
                 </a>
               </li>
               <li>
-                <a href="tel:+18175550123" className="hover:opacity-100 transition">
+                <a href="tel:+18175550123">
                   (817) 555-0123
                 </a>
               </li>

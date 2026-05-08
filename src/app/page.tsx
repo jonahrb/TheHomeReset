@@ -84,7 +84,7 @@ export default function HomePage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="p-8 rounded-2xl text-center flex flex-col items-center gap-3 transition hover:-translate-y-1"
+                className="p-8 rounded-2xl text-center flex flex-col items-center gap-3"
                 style={{ background: "var(--bg-alt)", boxShadow: "var(--shadow-sm)" }}
               >
                 <span className="text-4xl">{item.icon}</span>
@@ -107,7 +107,7 @@ export default function HomePage() {
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-6 rounded-2xl flex flex-col gap-3 transition hover:-translate-y-1"
+                className="p-6 rounded-2xl flex flex-col gap-3"
                 style={{ background: "var(--bg)", boxShadow: "var(--shadow-sm)" }}
               >
                 <span className="text-3xl">{f.icon}</span>
