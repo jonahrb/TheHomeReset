@@ -2,7 +2,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = "https://thehomereset.com"; // Change to your production URL
+	const baseUrl = "https://thehomereset.us";
 	const now = new Date().toISOString();
 	return [
 		{ url: `${baseUrl}/`, lastModified: now },
