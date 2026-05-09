@@ -7,9 +7,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: "The Home Reset | Professional Home Cleaning",
+  title: "The Home Reset | Fort Worth Home Cleaning",
   description:
-    "Top-rated home cleaning services. We reset your space so you can reset your life.",
+    "Reset - Rest - Create. Professional home cleaning in the Eagle Mountain and Fort Worth area. We help busy families come home to peace with our reliable, eco-friendly cleaning services. Book your reset today!",
 };
 
 export default function RootLayout({
