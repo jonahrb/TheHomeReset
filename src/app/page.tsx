@@ -4,7 +4,7 @@ const features = [
   { icon: "✨", title: "Spotless Every Time", desc: "Our multi-point checklist ensures consistent, thorough results on every visit." },
   { icon: "🔒", title: "Trusted & Secure", desc: "Every cleaner is background-checked. Your home is in safe, professional hands." },
   { icon: "🌿", title: "Safe Products", desc: "We use clean, non-toxic products that are safe for kids, pets, and the whole family." },
-  { icon: "📅", title: "Your Schedule", desc: "Weekly, bi-weekly, or monthly — we work around your life, not the other way around." },
+  { icon: "📅", title: "Flexibility", desc: "Weekly, bi-weekly, or monthly. We work around your life, not the other way around." },
 ];
 
 const testimonials = [
@@ -31,21 +31,17 @@ export default function HomePage() {
           style={{ background: "radial-gradient(circle, var(--accent-dark) 0%, transparent 70%)" }}
         />
 
-        <span
-          className="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6 tracking-wide"
-          style={{ background: "rgba(201,169,122,0.18)", color: "var(--accent-dark)" }}
-        >
+        <h1 className="text-5xl md:text-7xl font-bold mb-3 tracking-wide" style={{ color: "var(--accent-dark)" }}>
           The Home Reset
-        </span>
-
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-5 leading-tight whitespace-nowrap" style={{ color: "var(--text)" }}>
+        </h1>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: "var(--text)" }}>
           Reset <span className="mx-3" style={{ color: "var(--accent-dark)" }}>·</span>
           Rest <span className="mx-3" style={{ color: "var(--accent-dark)" }}>·</span>
           Create
-        </h1>
+        </h2>
         <p className="text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style={{ color: "var(--text-muted)" }}>
           Whether you&apos;re a busy family, a stay-at-home parent, or working long days,
-          we will reset your space so you can get back to what matters.
+          we will reset your space so you can get back to creating the life you want.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
@@ -71,11 +67,6 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent-dark)" }}>What We Clean</span>
             <h2 className="text-3xl font-bold mt-2" style={{ color: "var(--text)" }}>We Serve</h2>
-            <p className="text-sm max-w-lg mx-auto leading-relaxed mt-3" style={{ color: "var(--text-muted)" }}>
-              Lake Country / Eagle Mountain / Lake Worth / Saginaw / Fort Worth
-              <br />
-              If you're unsure whether we cover your address, contact us and we'll confirm availability.
-            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[

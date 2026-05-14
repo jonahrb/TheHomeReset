@@ -24,8 +24,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+18175550123">
-                  (817) 555-0123
+                <a href="tel:+16822330863">
+                  (682) 233-0863
                 </a>
               </li>
             </ul>
@@ -33,7 +33,7 @@ export default function Footer() {
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(249,246,241,0.35)" }}>Payment</p>
                 <div className="flex flex-wrap gap-2">
-                  {["Cash", "Zelle", "Venmo", "Check"].map((p) => (
+                  {["Zelle", "Venmo", "Cash", "Check"].map((p) => (
                     <span
                       key={p}
                       className="px-3 py-1 rounded-full text-xs font-medium"

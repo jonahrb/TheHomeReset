@@ -105,8 +105,8 @@ export default function ContactPage() {
                   <span className="text-2xl">📞</span>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)" }}>Text / Call</p>
-                    <a href="tel:+18175550123" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
-                      (817) 555-0123
+                    <a href="tel:+16822330863" className="text-sm font-medium hover:underline" style={{ color: "var(--text)" }}>
+                      (682) 233-0863
                     </a>
                   </div>
                 </li>
@@ -128,7 +128,7 @@ export default function ContactPage() {
             >
               <h3 className="text-sm font-bold mb-4" style={{ color: "var(--text)" }}>Payment Accepted</h3>
               <div className="flex flex-wrap gap-2">
-                {["Cash", "Zelle", "Venmo", "Check"].map((p) => (
+                {["Zelle", "Venmo", "Cash", "Check"].map((p) => (
                   <span
                     key={p}
                     className="px-4 py-2 rounded-full text-xs font-semibold"
